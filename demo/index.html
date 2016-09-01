@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-ZA">
+    <head>
+        <title>vTimer demo</title>
+        <script src="../node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
+        <script src="../source/jquery.vtimer.js" type="text/javascript"></script>
+        <script type="text/javascript">
+			(function($){
+				$(document).ready(function () {
+					var oneDuration = 10;
+					var twoDuration = 5;
+					var threeDuration = 20;
+
+					(function(){
+						$('#one').text('One: ' + oneDuration);
+						$('#two').text('Two: waiting');
+						$('#three').text('Three ' + threeDuration);
+					})();
+
+					$('#one').vTimer('start', {duration: oneDuration})
+							.on('update', function (e, remaining) {
+								$('#one').text('One: ' + remaining);
+							})
+							.on('complete', function () {
+								$('#one').text('One: complete');
+								$('#two').text('Two: ' + twoDuration);
+
+								$('#two').vTimer('start', {duration: twoDuration})
+										.on('update', function (e, remaining) {
+											$('#two').text('Two: ' + remaining);
+										})
+										.on('complete', function () {
+											$('#two').text('Two: complete');
+											$('#three').vTimer('stop');
+										});
+							});
+
+					$('#three').vTimer('start', {duration: threeDuration})
+							.on('update', function (e, remaining) {
+								$('#three').text('Three: ' + remaining);
+							}).on('stop', function () {
+								$('#three').text('Three: stopped');
+							});
+				});
+			})(jQuery);
+        </script>
+        <style type="text/css">
+            body{
+                font-family: arial, helvetica, sans-serif;
+                font-size: 30px;
+            }
+        </style>
+    </head>
+    <body>
+		<div id="one"></div>
+		<div id="two"></div>
+		<div id="three"></div>
+    </body>
+</html>

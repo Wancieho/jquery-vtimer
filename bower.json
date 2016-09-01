@@ -1,0 +1,16 @@
+{
+  "name": "jquery-vtimer",
+  "version": "0.0.2",
+  "main" : "source/jquery.vtimer.js",
+  "ignore": [
+    "demo",
+    "node_modules",
+    "source",
+    ".gitignore",
+    "README.md",
+    "bower.json",
+    "gulpfile.js",
+    "package.json"
+  ],
+  "devDependencies": {}
+}
