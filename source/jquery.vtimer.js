@@ -5,7 +5,7 @@
 	var pluginName = 'vTimer';
 	var defaults = {duration: 0};
 
-	function Plugin(element, options) {
+	function VTimer(element, options) {
 		this.element = element;
 
 		this.settings = $.extend({}, defaults, options);
@@ -24,22 +24,22 @@
 	function loop() {
 		var scope = this;
 
-		scope.remaining = scope.expiresAt - microtime();
+		this.remaining = this.expiresAt - microtime();
 
-		$(scope.element).trigger('update', scope.remaining);
+		$(this.element).trigger('update', this.remaining);
 
-		if (scope.remaining <= 0) {
-			$(scope.element).trigger('complete');
+		if (this.remaining <= 0) {
+			$(this.element).trigger('complete');
 
 			this.stop();
 		} else {
-			scope.interval = setTimeout(function () {
+			this.interval = setTimeout(function () {
 				loop.apply(scope);
 			}, 1000);
 		}
 	}
 
-	$.extend(Plugin.prototype, {
+	$.extend(VTimer.prototype, {
 		start: function () {
 			this.stop();
 
@@ -50,17 +50,26 @@
 
 			clearInterval(this.interval);
 			this.interval = null;
+		},
+		cancel: function () {
+			$(this.element).trigger('cancel');
+
+			this.stop();
 		}
 	});
 
-	$.fn[pluginName] = function (options, params) {
+	$.fn[pluginName] = function (method, options) {
 		return this.each(function () {
 			if (!$.data(this, 'plugin_' + pluginName)) {
-				$.data(this, 'plugin_' + pluginName, new Plugin(this, options));
+				$.data(this, 'plugin_' + pluginName, new VTimer(this, options));
 			}
 
-			if (typeof options === 'string' && typeof $.data(this, 'plugin_' + pluginName)[options] === 'function') {
-				$.data(this, 'plugin_' + pluginName)[options](params);
+			if (method === 'start') {
+				$.data(this, 'plugin_' + pluginName).start();
+			}
+
+			if (method === 'cancel') {
+				$.data(this, 'plugin_' + pluginName).cancel();
 			}
 		});
 	};

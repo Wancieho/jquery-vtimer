@@ -8,7 +8,7 @@ var license = '/*\n' +
 		' * Description: Configurable event-based jQuery timer\n' +
 		' * Author: https://github.com/Wancieho\n' +
 		' * License: MIT\n' +
-		' * Version: 0.0.2\n' +
+		' * Version: 0.0.1\n' +
 		' * Dependancies: jquery-1.*\n' +
 		' * Date: 10/02/2016\n' +
 		' */\n';

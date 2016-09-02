@@ -5,16 +5,16 @@
         <script src="../node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
         <script src="../source/jquery.vtimer.js" type="text/javascript"></script>
         <script type="text/javascript">
-			(function($){
+			(function ($) {
 				$(document).ready(function () {
-					var oneDuration = 10;
-					var twoDuration = 5;
-					var threeDuration = 20;
+					var oneDuration = 4;
+					var twoDuration = 2;
+					var threeDuration = 7;
 
-					(function(){
+					(function () {
 						$('#one').text('One: ' + oneDuration);
-						$('#two').text('Two: waiting');
-						$('#three').text('Three ' + threeDuration);
+						$('#two').text('Two: waiting for One to complete');
+						$('#three').text('Three: ' + threeDuration);
 					})();
 
 					$('#one').vTimer('start', {duration: oneDuration})
@@ -31,16 +31,22 @@
 										})
 										.on('complete', function () {
 											$('#two').text('Two: complete');
-											$('#three').vTimer('stop');
+											$('#three').vTimer('cancel');
 										});
 							});
 
 					$('#three').vTimer('start', {duration: threeDuration})
 							.on('update', function (e, remaining) {
 								$('#three').text('Three: ' + remaining);
-							}).on('stop', function () {
-								$('#three').text('Three: stopped');
-							});
+							}).on('cancel', function () {
+						$('#three').text('Three: cancelled');
+					}).on('complete', function () {
+						$('#three').text('Three: completed');
+					});
+
+					$('[name="one"]').on('click', function () {
+						$('#one').vTimer('cancel');
+					});
 				});
 			})(jQuery);
         </script>
@@ -52,8 +58,11 @@
         </style>
     </head>
     <body>
-		<div id="one"></div>
-		<div id="two"></div>
-		<div id="three"></div>
+		<div>
+			<div id="one"></div>
+			<div id="two"></div>
+			<div id="three"></div>
+			<input type="submit" name="one" value="Cancel One"/>
+		</div>
     </body>
 </html>
