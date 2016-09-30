@@ -1,4 +1,4 @@
-#vTimer v0.0.1
+#vTimer v0.0.3
 
 Configurable event-based jQuery timer
 

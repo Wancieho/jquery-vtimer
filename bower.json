@@ -1,6 +1,6 @@
 {
   "name": "jquery-vtimer",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main" : "source/jquery.vtimer.js",
   "ignore": [
     "demo",
