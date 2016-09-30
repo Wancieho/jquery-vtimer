@@ -3,7 +3,7 @@
  * Description: Configurable event-based jQuery timer
  * Author: https://github.com/Wancieho
  * License: MIT
- * Version: 0.0.1
+ * Version: 0.0.2
  * Dependancies: jquery-1.*
  * Date: 10/02/2016
  */

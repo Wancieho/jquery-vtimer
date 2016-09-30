@@ -7,7 +7,6 @@
     "node_modules",
     "source",
     ".gitignore",
-    "README.md",
     "bower.json",
     "gulpfile.js",
     "package.json"
