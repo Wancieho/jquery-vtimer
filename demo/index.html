@@ -39,12 +39,13 @@
 							.on('update', function (e, remaining) {
 								$('#three').text('Three: ' + remaining);
 							}).on('cancel', function () {
-						$('#three').text('Three: cancelled');
+						$('#three').text('Three: cancelled by Two completing');
 					}).on('complete', function () {
 						$('#three').text('Three: completed');
 					});
 
 					$('[name="one"]').on('click', function () {
+						$('#one').text('One: cancelled by button click');
 						$('#one').vTimer('cancel');
 					});
 				});
